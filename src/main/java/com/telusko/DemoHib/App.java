@@ -28,16 +28,18 @@ public class App {
 		SessionFactory sf = con.buildSessionFactory(reg);
 		Session session1 = sf.openSession();
 		session1.beginTransaction();
-		SQLQuery query = session1.createSQLQuery("select *From student where marks>60");
-		query.addEntity(Student.class);
-		List<Student> stList = query.list();
 		
+		//detach and remove also load and get
 		
-		for(Student o: stList)
-			System.out.println(o);
+		Laptop l = new Laptop();
+		l.setLid(101);
+		l.setLname("Sony");
 		
+		session1.save(l);
 		
-		 session1.getTransaction().commit();
+		l.setLname("Test");
+		session1.getTransaction().commit();
+	
 
 		sf.close();
 	}

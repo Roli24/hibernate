@@ -21,23 +21,21 @@ public class Alien {
 	
 	@Override
 	public String toString() {
-		return "Alien [aid=" + aid + ", aname=" + aname + ", color=" + color + ", laptop=" + laptop + "]";
+		return "Alien [aid=" + aid + ", aname=" + aname + ", color=" + color + ", laptop="  + "]";
 	}
 	@Id
 	private int aid;
 	private String aname;
 	private String color;
-	
-	@OneToMany(mappedBy = "Alien")
-	private List<Laptop> laptop = new ArrayList<>();
-	
-	
-	public List<Laptop> getLaptop() {
-		return laptop;
-	}
-	public void setLaptop(List<Laptop> laptop) {
-		this.laptop = laptop;
-	}
+
+	/*
+	 * @OneToMany(mappedBy = "Alien") private List<Laptop> laptop = new
+	 * ArrayList<>();
+	 * 
+	 * 
+	 * public List<Laptop> getLaptop() { return laptop; } public void
+	 * setLaptop(List<Laptop> laptop) { this.laptop = laptop; }
+	 */
 	public int getAid() {
 		return aid;
 	}
