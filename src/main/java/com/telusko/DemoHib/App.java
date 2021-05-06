@@ -1,13 +1,10 @@
 package com.telusko.DemoHib;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -30,15 +27,16 @@ public class App {
 		SessionFactory sf = con.buildSessionFactory(reg);
 		Session session1 = sf.openSession();
 		 session1.beginTransaction();
-		 Random  r = new Random();
-		 for(int i=0;i<=50;i++)
-		 {
-			 Student s = new Student();
-			 s.setRollno(i);
-			 s.setName("Name "+i);
-			 s.setMarks(r.nextInt(100));
-			 session1.save(s);
-		 }
+		 int b=60;
+		
+		 
+		 Query hibQuery = session1.createQuery("select sum(marks) as marks from Student where marks>:b");
+		 hibQuery.setParameter("b", b);
+		 Object student =  hibQuery.uniqueResult();
+		 
+		// for(Object s : student)
+			 System.out.println(student);
+		 
 		 session1.getTransaction().commit();
 
 		sf.close();
