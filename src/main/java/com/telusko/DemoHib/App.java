@@ -3,6 +3,7 @@ package com.telusko.DemoHib;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -26,17 +27,16 @@ public class App {
 
 		SessionFactory sf = con.buildSessionFactory(reg);
 		Session session1 = sf.openSession();
-		 session1.beginTransaction();
-		 int b=60;
+		session1.beginTransaction();
+		SQLQuery query = session1.createSQLQuery("select *From student where marks>60");
+		query.addEntity(Student.class);
+		List<Student> stList = query.list();
 		
-		 
-		 Query hibQuery = session1.createQuery("select sum(marks) as marks from Student where marks>:b");
-		 hibQuery.setParameter("b", b);
-		 Object student =  hibQuery.uniqueResult();
-		 
-		// for(Object s : student)
-			 System.out.println(student);
-		 
+		
+		for(Student o: stList)
+			System.out.println(o);
+		
+		
 		 session1.getTransaction().commit();
 
 		sf.close();
