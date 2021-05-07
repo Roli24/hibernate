@@ -13,9 +13,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name="alien_table")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Alien {
 	
 	
